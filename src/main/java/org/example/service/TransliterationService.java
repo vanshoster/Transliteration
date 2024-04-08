@@ -2,6 +2,9 @@ package org.example.service;
 
 import org.example.model.User;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 public class TransliterationService {
 
@@ -12,11 +15,9 @@ public class TransliterationService {
         boolean isHaveMiddleAndLastNames = !user.getMiddleName().isEmpty() && !user.getLastName().isEmpty();
 
         //Получаем полное имя
-        if (isHaveMiddleAndLastNames) {
-            fullName = user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName();
-        } else {
-            fullName = user.getFirstName();
-        }
+        fullName = Stream.of(user.getFirstName(), user.getMiddleName(), user.getLastName())
+                .filter(val -> !(val.isEmpty()))
+                .collect(Collectors.joining(" "));
 
         //Получаем транслитерацию с помощью сервиса
         String transliteratedFullName = Transliteration.transliterate(fullName);
