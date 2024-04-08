@@ -21,7 +21,7 @@ public class TransliterationServiceTest {
     }
 
     @Test
-    void transliterateUserWithOnlyFirstName() {
+    public void transliterateUserWithOnlyFirstName() {
         // Создаем пользователя только с firstName, включающим в себя все имена
         User user = new User();
         user.setFirstName("Анталья Ивановна Некрасова-Илларионова");
